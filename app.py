@@ -8,12 +8,12 @@ class App:
     def __init__(self):
         
         self.urls = [
-            "http://fit.trianh.edu.vn/phong-thi-nghiem-an-toan-thong-tin/",  
-            "https://www.golfonline.sk/odborne-clanky/greenkeeping/plesen-snezna-a-plesen-snezna-siva/", 
-            "https://mru.home.pl/produkt/afriso-tm8-ir/#reviews",
+            # "http://fit.trianh.edu.vn/phong-thi-nghiem-an-toan-thong-tin/",  
+            # "https://www.golfonline.sk/odborne-clanky/greenkeeping/plesen-snezna-a-plesen-snezna-siva/", 
+            # "https://mru.home.pl/produkt/afriso-tm8-ir/#reviews",
             "https://www.fivereasonssports.com/news/4-types-of-candy-most-adults-will-like/",
-            "https://www.lizsteel.com/a-new-favourite-teapot-to-sketch/",
-            "https://www.neobienetre.fr/forum-bien-etre-medecines-douces-developpement-personnel/topic/play-game-for-fun/",
+            # "https://www.lizsteel.com/a-new-favourite-teapot-to-sketch/",
+            # "https://www.neobienetre.fr/forum-bien-etre-medecines-douces-developpement-personnel/topic/play-game-for-fun/",
             # "https://bulevard.bg/interviews/ivaylo-zahariev-v-ekskluzivno-intervyu-19.html",
             # "https://www.thelowdownblog.com/2018/03/riding-in-smartphone-powered-self.html",
             # "https://vocal.media/lifehack/mindful-music",
@@ -191,13 +191,13 @@ class App:
                             continue
                         else:
                             if name_field:
-                                name_field.send_keys("John Doe")
+                                name_field.send_keys("Nhu")
                             if email_field:
-                                email_field.send_keys("john.doe@example.com")
+                                email_field.send_keys("nhu@shemail.com")
                             if phone_field:
-                                phone_field.send_keys("0123456789")
+                                phone_field.send_keys("0398748129")
                             if comment_box:
-                                comment_box.send_keys("This is a test comment")
+                                comment_box.send_keys("Hello world.")
                         
                             # Submit the comment
                             if submit_button:

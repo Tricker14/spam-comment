@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import scrolledtext, messagebox
 from threading import Thread
 from app import App
+import time
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -45,7 +46,7 @@ class URLScannerGUI:
         self.url_listbox = tk.Listbox(self.status_frame, width=60)
         self.url_listbox.grid(row=0, column=0, padx=10, pady=10)
 
-        self.status_listbox = tk.Listbox(self.status_frame, width=20)
+        self.status_listbox = tk.Listbox(self.status_frame, width=40)
         self.status_listbox.grid(row=0, column=1, padx=10, pady=10)
 
         # Scrollbar for listboxes
@@ -102,31 +103,39 @@ class URLScannerGUI:
                             continue
                         else:
                             if name_field:
-                                name_field.send_keys("John Doe")
+                                name_field.send_keys("HomeNest")
                             if email_field:
-                                email_field.send_keys("john.doe@example.com")
+                                email_field.send_keys("helloGAY@shemail.com")
                             if phone_field:
-                                phone_field.send_keys("0123456789")
+                                phone_field.send_keys("0976839023")
                             if comment_box:
-                                comment_box.send_keys("This is a test comment")
+                                comment_box.send_keys("https://homenest.com.vn/ Chúng tôi là chuyên gia hàng đầu trong lĩnh vực SEO, Thiết kế Website và Marketing. Với 10+ năm kinh nghiệm và đội ngũ tài năng, chúng tôi biến ý tưởng thành hiệu suất và thúc đẩy sự phát triển kinh doanh của bạn trên mọi khía cạnh số hóa.")
                         
                             # Submit the comment
                             if submit_button:
+                                time.sleep(1)
                                 submit_button.click()
+                                time.sleep(1)
 
                     except ElementClickInterceptedException:
                         self.update_status(url, "Failed (Click Interception)")
+                        continue
                     except ElementNotInteractableException:
                         self.update_status(url, "Failed (Element Not Interactable)")
+                        continue
                     except WebDriverException:
                         self.update_status(url, "Failed (WebDriver Error)")
+                        continue
 
                 except TimeoutException:
                     self.update_status(url, "Failed (Timeout)")
+                    continue
                 except UnexpectedAlertPresentException:
                     self.update_status(url, "Failed (Unexpected Alert)")
+                    continue
                 except WebDriverException:
                     self.update_status(url, "Failed (WebDriver Error)")
+                    continue
 
                 self.update_status(url, "Success")
                 self.success_count += 1
