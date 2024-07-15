@@ -8,6 +8,10 @@ class App:
     def __init__(self):
         
         self.urls = [
+            "http://fit.trianh.edu.vn/phong-thi-nghiem-an-toan-thong-tin/",
+            "http://aikenlandscaping.com/009-2/",
+            "http://fit.trianh.edu.vn/phong-thi-nghiem-an-toan-thong-tin/",
+
         ]
         
         self.selectors = {
@@ -44,6 +48,11 @@ class App:
         }
 
         # Initialize the Chrome WebDriver 
+        self.start_driver()
+        self.total = 0
+        self.passed = 0
+
+    def start_driver(self):
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_experimental_option("prefs", {"profile.managed_default_content_settings.sensors": 2})
         chrome_options.add_experimental_option("excludeSwitches", ['enable-automation'])
@@ -54,8 +63,10 @@ class App:
         chrome_options.add_argument("--ignore-certificate-errors")
 
         self.driver = webdriver.Chrome(options=chrome_options)
-        self.total = 0
-        self.passed = 0
+
+    def restart_driver(self):
+        self.driver.quit()
+        self.start_driver()
 
     def run(self):
         try:
@@ -142,6 +153,8 @@ class App:
             return True
         except NoSuchElementException:
             return False
+
+
 
 if __name__ == "__main__":
     App().run()

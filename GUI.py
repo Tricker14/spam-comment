@@ -75,6 +75,7 @@ class URLScannerGUI:
         self.scan_thread = Thread(target=self.run_scanning)
         self.scan_thread.start()
 
+
     def run_scanning(self):
         try:
             for url in self.app.urls:
@@ -84,18 +85,28 @@ class URLScannerGUI:
 
                 try:
                     # Process the URL
-                    self.app.driver.get(url)
-                    WebDriverWait(self.app.driver, 5)
+                    print("INIT ", url)
+                    # self.app.driver.get(url)
+                    try:
+                        self.app.driver.get(url)
+                    except Exception as e:
+                        print(f"Exception while loading {url}: {e}")
+                        self.update_status(url, "Failed (Load Exception)")
+                        self.app.restart_driver()
+                        continue
+                    print("CHECKING ", url)
+                    WebDriverWait(self.app.driver, 2)
+                    print("CHECKED ", url)
 
                     if self.app.is_captcha_present():
                         self.update_status(url, "Failed (CAPTCHA)")
                         continue
-
+                    print("CHECKED CAPTCHA", url)
                     try:
                         name_field = self.app.find_element_by_any_selector(self.app.selectors["author"])
                         email_field = self.app.find_element_by_any_selector(self.app.selectors["email"])
                         phone_field = self.app.find_element_by_any_selector(self.app.selectors["phone"])
-                        website_field = self.find_element_by_any_selector(self.selectors["website"])
+                        website_field = self.app.find_element_by_any_selector(self.app.selectors["website"])
                         comment_box = self.app.find_element_by_any_selector(self.app.selectors["comment"])
                         submit_button = self.app.find_element_by_any_selector(self.app.selectors["submit"])
 
@@ -108,9 +119,9 @@ class URLScannerGUI:
                             if email_field:
                                 email_field.send_keys("hello@email.com")
                             if phone_field:
-                                website_field.send_keys("https://homenest.com.vn/")
+                                phone_field.send_keys("https://homenest.com.vn/")
                             if website_field:
-                                phone_field.send_keys("0398748129")
+                                website_field.send_keys("0398748129")
                             if comment_box:
                                 comment_box.send_keys("https://homenest.com.vn/ Chúng tôi là chuyên gia hàng đầu trong lĩnh vực SEO, Thiết kế Website và Marketing. Với 10+ năm kinh nghiệm và đội ngũ tài năng, chúng tôi biến ý tưởng thành hiệu suất và thúc đẩy sự phát triển kinh doanh của bạn trên mọi khía cạnh số hóa.")
                         
@@ -119,25 +130,49 @@ class URLScannerGUI:
                                 time.sleep(1)
                                 submit_button.click()
                                 time.sleep(1)
-
+                    
                     except ElementClickInterceptedException:
                         self.update_status(url, "Failed (Click Interception)")
+                        print("ElementClickInterceptedException called")
                         continue
                     except ElementNotInteractableException:
                         self.update_status(url, "Failed (Element Not Interactable)")
+                        print("ElementNotInteractableException called")
                         continue
-                    except WebDriverException:
-                        self.update_status(url, "Failed (WebDriver Error)")
+                    # except WebDriverException:
+                    #     self.update_status(url, "Failed (WebDriver Error)")
+                    #     print("WebDriverException called")
+                    #     continue
+                    except WebDriverException as e:
+                        if 'out of memory' in str(e):
+                            self.update_status(url, "Failed (Out of Memory)")
+                            print("Out of Memory Error called")
+                        else:
+                            self.update_status(url, "Failed (WebDriver Error)")
+                            print("WebDriverException called")
                         continue
 
                 except TimeoutException:
                     self.update_status(url, "Failed (Timeout)")
+                    print("Timeout called")
+                    self.app.restart_driver()
                     continue
                 except UnexpectedAlertPresentException:
                     self.update_status(url, "Failed (Unexpected Alert)")
+                    print("UnexpectedAlertPresentException called")
                     continue
-                except WebDriverException:
-                    self.update_status(url, "Failed (WebDriver Error)")
+                # except WebDriverException:
+                #     self.update_status(url, "Failed (WebDriver Error)")
+                #     print("WebDriverException called")
+                #     continue
+                except WebDriverException as e:
+                    if 'out of memory' in str(e):
+                        self.update_status(url, "Failed (Out of Memory)")
+                        print("Out of Memory Error called")
+                    else:
+                        self.update_status(url, "Failed (WebDriver Error)")
+                        print("WebDriverException called")
+                    self.restart_driver()
                     continue
 
                 self.update_status(url, "Success")
