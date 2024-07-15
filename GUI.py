@@ -14,7 +14,7 @@ from selenium.common.exceptions import ElementNotInteractableException, NoSuchEl
 class URLScannerGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("URL Scanner")
+        self.root.title("Auto Commenter")
 
         self.app = App()
 
