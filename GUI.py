@@ -85,7 +85,7 @@ class URLScannerGUI:
                 try:
                     # Process the URL
                     self.app.driver.get(url)
-                    WebDriverWait(self.app.driver, 1)
+                    WebDriverWait(self.app.driver, 5)
 
                     if self.app.is_captcha_present():
                         self.update_status(url, "Failed (CAPTCHA)")
@@ -95,6 +95,7 @@ class URLScannerGUI:
                         name_field = self.app.find_element_by_any_selector(self.app.selectors["author"])
                         email_field = self.app.find_element_by_any_selector(self.app.selectors["email"])
                         phone_field = self.app.find_element_by_any_selector(self.app.selectors["phone"])
+                        website_field = self.find_element_by_any_selector(self.selectors["website"])
                         comment_box = self.app.find_element_by_any_selector(self.app.selectors["comment"])
                         submit_button = self.app.find_element_by_any_selector(self.app.selectors["submit"])
 
@@ -105,9 +106,11 @@ class URLScannerGUI:
                             if name_field:
                                 name_field.send_keys("HomeNest")
                             if email_field:
-                                email_field.send_keys("helloGAY@shemail.com")
+                                email_field.send_keys("hello@email.com")
                             if phone_field:
-                                phone_field.send_keys("0976839023")
+                                website_field.send_keys("https://homenest.com.vn/")
+                            if website_field:
+                                phone_field.send_keys("0398748129")
                             if comment_box:
                                 comment_box.send_keys("https://homenest.com.vn/ Chúng tôi là chuyên gia hàng đầu trong lĩnh vực SEO, Thiết kế Website và Marketing. Với 10+ năm kinh nghiệm và đội ngũ tài năng, chúng tôi biến ý tưởng thành hiệu suất và thúc đẩy sự phát triển kinh doanh của bạn trên mọi khía cạnh số hóa.")
                         
