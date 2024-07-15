@@ -85,8 +85,6 @@ class URLScannerGUI:
 
                 try:
                     # Process the URL
-                    print("INIT ", url)
-                    # self.app.driver.get(url)
                     try:
                         self.app.driver.get(url)
                     except Exception as e:
@@ -94,14 +92,11 @@ class URLScannerGUI:
                         self.update_status(url, "Failed (Load Exception)")
                         self.app.restart_driver()
                         continue
-                    print("CHECKING ", url)
                     WebDriverWait(self.app.driver, 2)
-                    print("CHECKED ", url)
 
                     if self.app.is_captcha_present():
                         self.update_status(url, "Failed (CAPTCHA)")
                         continue
-                    print("CHECKED CAPTCHA", url)
                     try:
                         name_field = self.app.find_element_by_any_selector(self.app.selectors["author"])
                         email_field = self.app.find_element_by_any_selector(self.app.selectors["email"])
@@ -172,7 +167,7 @@ class URLScannerGUI:
                     else:
                         self.update_status(url, "Failed (WebDriver Error)")
                         print("WebDriverException called")
-                    self.restart_driver()
+                    self.app.restart_driver()
                     continue
 
                 self.update_status(url, "Success")
