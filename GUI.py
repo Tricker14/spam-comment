@@ -101,6 +101,7 @@ class URLScannerGUI:
 
                         if not all([comment_box, name_field, email_field, phone_field, submit_button]):
                             self.update_status(url, "Failed (Elements not found)")
+                            print("Elements not found")
                             continue
                         else:
                             if name_field:
@@ -108,9 +109,9 @@ class URLScannerGUI:
                             if email_field:
                                 email_field.send_keys("hello@email.com")
                             if phone_field:
-                                phone_field.send_keys("https://homenest.com.vn/")
+                                phone_field.send_keys("0398748129")
                             if website_field:
-                                website_field.send_keys("0398748129")
+                                website_field.send_keys("https://homenest.com.vn/")
                             if comment_box:
                                 comment_box.send_keys("https://homenest.com.vn/ Chúng tôi là chuyên gia hàng đầu trong lĩnh vực SEO, Thiết kế Website và Marketing. Với 10+ năm kinh nghiệm và đội ngũ tài năng, chúng tôi biến ý tưởng thành hiệu suất và thúc đẩy sự phát triển kinh doanh của bạn trên mọi khía cạnh số hóa.")
                         
