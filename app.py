@@ -8,9 +8,14 @@ class App:
     def __init__(self):
         
         self.urls = [
-            "http://fit.trianh.edu.vn/phong-thi-nghiem-an-toan-thong-tin/",
             "http://aikenlandscaping.com/009-2/",
-            "http://fit.trianh.edu.vn/phong-thi-nghiem-an-toan-thong-tin/",
+            "http://fit.trianh.edu.vn/phong-thi-nghiem-an-toan-thong-tin/",  
+            "https://www.golfonline.sk/odborne-clanky/greenkeeping/plesen-snezna-a-plesen-snezna-siva/", 
+            "https://mru.home.pl/produkt/afriso-tm8-ir/#reviews",
+            "https://www.fivereasonssports.com/news/4-types-of-candy-most-adults-will-like/",
+            "https://www.lizsteel.com/a-new-favourite-teapot-to-sketch/",
+            "https://www.neobienetre.fr/forum-bien-etre-medecines-douces-developpement-personnel/topic/play-game-for-fun/",
+            "https://bulevard.bg/interviews/ivaylo-zahariev-v-ekskluzivno-intervyu-19.html",
 
         ]
         

@@ -85,13 +85,7 @@ class URLScannerGUI:
 
                 try:
                     # Process the URL
-                    try:
-                        self.app.driver.get(url)
-                    except Exception as e:
-                        print(f"Exception while loading {url}: {e}")
-                        self.update_status(url, "Failed (Load Exception)")
-                        self.app.restart_driver()
-                        continue
+                    self.app.driver.get(url)
                     WebDriverWait(self.app.driver, 2)
 
                     if self.app.is_captcha_present():
@@ -170,9 +164,11 @@ class URLScannerGUI:
                     self.app.restart_driver()
                     continue
 
+                print(f"Success {url}")
                 self.update_status(url, "Success")
                 self.success_count += 1
                 self.update_success_count()
+                print("passed")
 
         finally:
             self.app.driver.quit()
