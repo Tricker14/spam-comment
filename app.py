@@ -32,8 +32,8 @@ class App:
                 "input[id*='mail' i]",
                 "input[type='email']"],
             "phone": [
-                "input[type='text'][name*='url' i]",  
-                "input[name*='url' i]",
+                "input[type='text'][name*='phone' i]",  
+                "input[name*='phone' i]",
                 "input[type='text']"],
             "website": [
                 "input[type='text'][name*='url' i]",  
