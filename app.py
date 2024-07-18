@@ -8,7 +8,11 @@ class App:
     def __init__(self):
         
         self.urls = [
-            "http://biyografiforum.10tl.net/showthread.php?pid=2382&tid=486"
+            "https://harry.sufehmi.com/archives/2022-01-24-cloud-and-drc/",
+            "https://dianamazal.com/2019/03/17/futuro-deseado/",
+            "https://development.bookyourcar.co.in/news/upcoming-car-models-of-2021-a-peek-into/",
+            "https://www.blogradardenoticias.com.br/pagina-exemplo/",
+            "http://themasterscall.net/apostle-edith-wells/",
         ]
         
         self.selectors = {
@@ -153,7 +157,6 @@ class App:
             return True
         except NoSuchElementException:
             return False
-
 
 
 if __name__ == "__main__":

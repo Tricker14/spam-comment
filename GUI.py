@@ -105,15 +105,15 @@ class URLScannerGUI:
                             continue
                         else:
                             if name_field:
-                                name_field.send_keys("HomeNest")
+                                name_field.send_keys("QuestX")
                             if email_field:
                                 email_field.send_keys("hello@email.com")
                             if phone_field:
                                 phone_field.send_keys("0398748129")
                             if website_field:
-                                website_field.send_keys("https://homenest.com.vn/")
+                                website_field.send_keys("https://questx.com.vn")
                             if comment_box:
-                                comment_box.send_keys("https://homenest.com.vn/ Chúng tôi là chuyên gia hàng đầu trong lĩnh vực SEO, Thiết kế Website và Marketing. Với 10+ năm kinh nghiệm và đội ngũ tài năng, chúng tôi biến ý tưởng thành hiệu suất và thúc đẩy sự phát triển kinh doanh của bạn trên mọi khía cạnh số hóa.")
+                                comment_box.send_keys("<a href='https://questx.com.vn/'>Questx</a> Technology Meets Imagination")
                         
                             # Submit the comment
                             if submit_button:
