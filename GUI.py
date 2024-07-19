@@ -119,7 +119,7 @@ class URLScannerGUI:
                                 comment_box.send_keys("<a href='https://canhoeatonpark.net/'>Eaton Park Quận 2</a> Eaton Park Quận 2 là dự án mới nhất của Gamuda Land, được phát triển với vị trí độc đáo ngay trên đường Mai Chí Thọ, Phường An Phú, Quận 2, nay thuộc TP Thủ Đức – TP Hồ Chí Minh")
                         
                             # Submit the comment
-                            if submit_button and comment_box:
+                            if submit_button:
                                 time.sleep(1)
                                 submit_button.click()
                                 time.sleep(1)
