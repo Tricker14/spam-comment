@@ -8,19 +8,7 @@ class App:
     def __init__(self):
         
         self.urls = [
-            "http://fit.trianh.edu.vn/phong-thi-nghiem-an-toan-thong-tin/",  
-            "https://www.golfonline.sk/odborne-clanky/greenkeeping/plesen-snezna-a-plesen-snezna-siva/", 
-            "https://mru.home.pl/produkt/afriso-tm8-ir/#reviews",
-            "https://www.fivereasonssports.com/news/4-types-of-candy-most-adults-will-like/",
-            "https://www.lizsteel.com/a-new-favourite-teapot-to-sketch/",
-            "https://www.neobienetre.fr/forum-bien-etre-medecines-douces-developpement-personnel/topic/play-game-for-fun/",
-            "https://bulevard.bg/interviews/ivaylo-zahariev-v-ekskluzivno-intervyu-19.html",
-            "https://www.thelowdownblog.com/2018/03/riding-in-smartphone-powered-self.html",
-            "https://vocal.media/lifehack/mindful-music",
-            "https://www.blendermarket.com/posts/contours-polystrips-combined?page=3",
-            "http://forum.asustor.com/viewtopic.php?f=130&p=15901&t=5143",
-            "https://ged.com/insession/new-employers-offering-gedworks_august2021/",
-            "https://my.rosenbauer.com/en-US/forums/support-forum/79de424e-174e-ee11-a81c-6045bd9b2daa",
+            "https://www.nasmeca.com/ghalymarco/",  
         ]
         
         self.selectors = {
@@ -178,7 +166,23 @@ class App:
         except NoSuchElementException:
             return False
 
-
+    def check_comment_posted(self, url, comment_text):
+        try:
+            self.driver.get(url)
+            self.driver.execute_script("location.reload(true);")
+            WebDriverWait(self.driver, 2)
+            
+            page_source = self.driver.page_source
+            print("page source ", page_source)
+            # Check if the comment text is present in the comment section
+            if comment_text in page_source:
+                print("Comment successfully posted.")
+                return True
+            else:
+                print("Comment not found.")
+                return False
+        except UnexpectedAlertPresentException:
+            print("alert exception")
 
 if __name__ == "__main__":
     App().run()

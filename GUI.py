@@ -168,11 +168,15 @@ class URLScannerGUI:
                     self.app.restart_driver()
                     continue
 
-                print(f"Success {url}")
-                self.update_status(url, "Success")
-                self.success_count += 1
-                self.update_success_count()
-                print("passed")
+                if self.app.check_comment_posted(url, "Eaton Park Quận 2</a> Eaton Park Quận 2 là dự án mới nhất của Gamuda Land, được phát triển với vị trí độc đáo ngay trên đường Mai Chí Thọ, Phường An Phú, Quận 2, nay thuộc TP Thủ Đức – TP Hồ Chí Minh"):
+                    print(f"Success {url}")
+                    self.update_status(url, "Success")
+                    self.success_count += 1
+                    self.update_success_count()
+                    print("passed")
+                else:
+                    self.update_status(url, "Failed (Check Success Failed)")
+                    print("Check Success Failed")
 
         finally:
             self.app.driver.quit()
