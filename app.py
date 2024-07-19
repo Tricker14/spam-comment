@@ -8,15 +8,11 @@ class App:
     def __init__(self):
         
         self.urls = [
-            "http://aikenlandscaping.com/009-2/",
-            "http://fit.trianh.edu.vn/phong-thi-nghiem-an-toan-thong-tin/",  
-            "https://www.golfonline.sk/odborne-clanky/greenkeeping/plesen-snezna-a-plesen-snezna-siva/", 
-            "https://mru.home.pl/produkt/afriso-tm8-ir/#reviews",
-            "https://www.fivereasonssports.com/news/4-types-of-candy-most-adults-will-like/",
-            "https://www.lizsteel.com/a-new-favourite-teapot-to-sketch/",
-            "https://www.neobienetre.fr/forum-bien-etre-medecines-douces-developpement-personnel/topic/play-game-for-fun/",
-            "https://bulevard.bg/interviews/ivaylo-zahariev-v-ekskluzivno-intervyu-19.html",
-
+            "https://harry.sufehmi.com/archives/2022-01-24-cloud-and-drc/",
+            "https://dianamazal.com/2019/03/17/futuro-deseado/",
+            "https://development.bookyourcar.co.in/news/upcoming-car-models-of-2021-a-peek-into/",
+            "https://www.blogradardenoticias.com.br/pagina-exemplo/",
+            "http://themasterscall.net/apostle-edith-wells/",
         ]
         
         self.selectors = {
@@ -49,6 +45,9 @@ class App:
                 "input[type='submit'][name*='submit' i]", 
                 "input[type='submit']", 
                 "input[name*='submit' i]",
+                "button[type='submit'][name*='submit' i]", 
+                "button[type='submit']", 
+                "button[name*='submit' i]",
                 "span"],
         }
 
@@ -158,7 +157,6 @@ class App:
             return True
         except NoSuchElementException:
             return False
-
 
 
 if __name__ == "__main__":
