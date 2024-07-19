@@ -91,6 +91,9 @@ class URLScannerGUI:
                     if self.app.is_captcha_present():
                         self.update_status(url, "Failed (CAPTCHA)")
                         continue
+                    # if len(self.app.find_form_elements(self.app.selectors["submit"])) > 1:
+                    #     print("too many forms")
+                    #     continue
                     try:
                         name_field = self.app.find_element_by_any_selector(self.app.selectors["author"])
                         email_field = self.app.find_element_by_any_selector(self.app.selectors["email"])
@@ -99,24 +102,24 @@ class URLScannerGUI:
                         comment_box = self.app.find_element_by_any_selector(self.app.selectors["comment"])
                         submit_button = self.app.find_element_by_any_selector(self.app.selectors["submit"])
 
-                        if not all([comment_box, name_field, email_field, phone_field, submit_button]):
+                        if not any([comment_box, name_field, email_field, phone_field, submit_button]):
                             self.update_status(url, "Failed (Elements not found)")
                             print("Elements not found")
                             continue
                         else:
                             if name_field:
-                                name_field.send_keys("HomeNest")
+                                name_field.send_keys("Eaton Park Quận 2")
                             if email_field:
-                                email_field.send_keys("hello@email.com")
+                                email_field.send_keys("eatonpark@gmail.com")
                             if phone_field:
                                 phone_field.send_keys("0398748129")
                             if website_field:
-                                website_field.send_keys("https://homenest.com.vn/")
+                                website_field.send_keys("https://canhoeatonpark.net/")
                             if comment_box:
-                                comment_box.send_keys("https://homenest.com.vn/ Chúng tôi là chuyên gia hàng đầu trong lĩnh vực SEO, Thiết kế Website và Marketing. Với 10+ năm kinh nghiệm và đội ngũ tài năng, chúng tôi biến ý tưởng thành hiệu suất và thúc đẩy sự phát triển kinh doanh của bạn trên mọi khía cạnh số hóa.")
+                                comment_box.send_keys("<a href='https://canhoeatonpark.net/'>Eaton Park Quận 2</a> Eaton Park Quận 2 là dự án mới nhất của Gamuda Land, được phát triển với vị trí độc đáo ngay trên đường Mai Chí Thọ, Phường An Phú, Quận 2, nay thuộc TP Thủ Đức – TP Hồ Chí Minh")
                         
                             # Submit the comment
-                            if submit_button:
+                            if submit_button and comment_box:
                                 time.sleep(1)
                                 submit_button.click()
                                 time.sleep(1)

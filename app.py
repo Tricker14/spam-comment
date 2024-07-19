@@ -8,7 +8,19 @@ class App:
     def __init__(self):
         
         self.urls = [
-            "http://biyografiforum.10tl.net/showthread.php?pid=2382&tid=486"
+            "http://fit.trianh.edu.vn/phong-thi-nghiem-an-toan-thong-tin/",  
+            "https://www.golfonline.sk/odborne-clanky/greenkeeping/plesen-snezna-a-plesen-snezna-siva/", 
+            "https://mru.home.pl/produkt/afriso-tm8-ir/#reviews",
+            "https://www.fivereasonssports.com/news/4-types-of-candy-most-adults-will-like/",
+            "https://www.lizsteel.com/a-new-favourite-teapot-to-sketch/",
+            "https://www.neobienetre.fr/forum-bien-etre-medecines-douces-developpement-personnel/topic/play-game-for-fun/",
+            "https://bulevard.bg/interviews/ivaylo-zahariev-v-ekskluzivno-intervyu-19.html",
+            "https://www.thelowdownblog.com/2018/03/riding-in-smartphone-powered-self.html",
+            "https://vocal.media/lifehack/mindful-music",
+            "https://www.blendermarket.com/posts/contours-polystrips-combined?page=3",
+            "http://forum.asustor.com/viewtopic.php?f=130&p=15901&t=5143",
+            "https://ged.com/insession/new-employers-offering-gedworks_august2021/",
+            "https://my.rosenbauer.com/en-US/forums/support-forum/79de424e-174e-ee11-a81c-6045bd9b2daa",
         ]
         
         self.selectors = {
@@ -145,6 +157,18 @@ class App:
                     return element
             except Exception as e:
                 print(f"Failed to find element with selector {selector}: {e}")
+
+    def find_form_elements(self, selectors):
+        elements = []  # List to hold found elements
+        for selector in selectors:
+            try:
+                element = self.driver.find_element(By.CSS_SELECTOR, selector)
+                if element and element.is_displayed() and element.is_enabled():
+                    elements.append(element)  # Add the element to the list
+            except Exception as e:
+                print(f"Failed to find element with selector {selector}: {e}")
+
+        return elements  # Return the list of found elements
 
     def is_captcha_present(self):
         try:
