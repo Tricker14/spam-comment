@@ -132,10 +132,6 @@ class URLScannerGUI:
                         self.update_status(url, "Failed (Element Not Interactable)")
                         print("ElementNotInteractableException called")
                         continue
-                    # except WebDriverException:
-                    #     self.update_status(url, "Failed (WebDriver Error)")
-                    #     print("WebDriverException called")
-                    #     continue
                     except WebDriverException as e:
                         if 'out of memory' in str(e):
                             self.update_status(url, "Failed (Out of Memory)")
@@ -154,10 +150,6 @@ class URLScannerGUI:
                     self.update_status(url, "Failed (Unexpected Alert)")
                     print("UnexpectedAlertPresentException called")
                     continue
-                # except WebDriverException:
-                #     self.update_status(url, "Failed (WebDriver Error)")
-                #     print("WebDriverException called")
-                #     continue
                 except WebDriverException as e:
                     if 'out of memory' in str(e):
                         self.update_status(url, "Failed (Out of Memory)")
