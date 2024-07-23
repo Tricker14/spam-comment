@@ -10,7 +10,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementNotInteractableException, NoSuchElementException, UnexpectedAlertPresentException, ElementClickInterceptedException, TimeoutException, WebDriverException
 
-
 class URLScannerGUI:
     def __init__(self, root):
         self.root = root
@@ -81,16 +80,21 @@ class URLScannerGUI:
             for url in self.app.urls:
                 self.scanned_urls += 1
                 self.update_progress()
-                print("passed ", self.success_count, "/", self.total_urls)
+                print("\n\n")
+                print("[PASSED]:\t\t", self.success_count, "/", self.total_urls)
 
                 try:
                     # Process the URL
                     self.app.driver.get(url)
                     WebDriverWait(self.app.driver, 2)
+                    print("[CURRENT]:\t\t", url)
 
                     if self.app.is_captcha_present():
                         self.update_status(url, "Failed (CAPTCHA)")
                         continue
+                    # if len(self.app.find_form_elements(self.app.selectors["submit"])) > 1:
+                    #     print("too many forms")
+                    #     continue
                     try:
                         name_field = self.app.find_element_by_any_selector(self.app.selectors["author"])
                         email_field = self.app.find_element_by_any_selector(self.app.selectors["email"])
@@ -99,21 +103,21 @@ class URLScannerGUI:
                         comment_box = self.app.find_element_by_any_selector(self.app.selectors["comment"])
                         submit_button = self.app.find_element_by_any_selector(self.app.selectors["submit"])
 
-                        if not all([comment_box, name_field, email_field, phone_field, submit_button]):
+                        if not any([comment_box, name_field, email_field, phone_field, submit_button]):
                             self.update_status(url, "Failed (Elements not found)")
-                            print("Elements not found")
+                            print("[FAILED]:\t\tElements not found")
                             continue
                         else:
                             if name_field:
-                                name_field.send_keys("QuestX")
+                                name_field.send_keys("Eaton Park Quận 2")
                             if email_field:
-                                email_field.send_keys("hello@email.com")
+                                email_field.send_keys("eatonpark@gmail.com")
                             if phone_field:
                                 phone_field.send_keys("0398748129")
                             if website_field:
-                                website_field.send_keys("https://questx.com.vn")
+                                website_field.send_keys("https://canhoeatonpark.net/")
                             if comment_box:
-                                comment_box.send_keys("<a href='https://questx.com.vn/'>Questx</a> Technology Meets Imagination")
+                                comment_box.send_keys("<a href='https://canhoeatonpark.net/'>Eaton Park Quận 2</a> Eaton Park Quận 2 là dự án mới nhất của Gamuda Land, được phát triển với vị trí độc đáo ngay trên đường Mai Chí Thọ, Phường An Phú, Quận 2, nay thuộc TP Thủ Đức – TP Hồ Chí Minh")
                         
                             # Submit the comment
                             if submit_button:
@@ -123,53 +127,49 @@ class URLScannerGUI:
                     
                     except ElementClickInterceptedException:
                         self.update_status(url, "Failed (Click Interception)")
-                        print("ElementClickInterceptedException called")
+                        print("[FAILED]:\t\tElementClickInterceptedException called")
                         continue
                     except ElementNotInteractableException:
                         self.update_status(url, "Failed (Element Not Interactable)")
-                        print("ElementNotInteractableException called")
+                        print("[FAILED]:\t\tElementNotInteractableException called")
                         continue
-                    # except WebDriverException:
-                    #     self.update_status(url, "Failed (WebDriver Error)")
-                    #     print("WebDriverException called")
-                    #     continue
                     except WebDriverException as e:
                         if 'out of memory' in str(e):
                             self.update_status(url, "Failed (Out of Memory)")
-                            print("Out of Memory Error called")
+                            print("[FAILED]:\t\tOut of Memory Error called")
                         else:
                             self.update_status(url, "Failed (WebDriver Error)")
-                            print("WebDriverException called")
+                            print("[FAILED]:\t\tWebDriverException called")
                         continue
 
                 except TimeoutException:
                     self.update_status(url, "Failed (Timeout)")
-                    print("Timeout called")
+                    print("[FAILED]:\t\tTimeout called")
                     self.app.restart_driver()
                     continue
                 except UnexpectedAlertPresentException:
                     self.update_status(url, "Failed (Unexpected Alert)")
-                    print("UnexpectedAlertPresentException called")
+                    print("[FAILED]:\t\tUnexpectedAlertPresentException called")
                     continue
-                # except WebDriverException:
-                #     self.update_status(url, "Failed (WebDriver Error)")
-                #     print("WebDriverException called")
-                #     continue
                 except WebDriverException as e:
                     if 'out of memory' in str(e):
                         self.update_status(url, "Failed (Out of Memory)")
-                        print("Out of Memory Error called")
+                        print("[FAILED]:\t\tOut of Memory Error called")
                     else:
                         self.update_status(url, "Failed (WebDriver Error)")
-                        print("WebDriverException called")
+                        print("[FAILED]:\t\tWebDriverException called")
                     self.app.restart_driver()
                     continue
 
-                print(f"Success {url}")
-                self.update_status(url, "Success")
-                self.success_count += 1
-                self.update_success_count()
-                print("passed")
+                if self.app.check_comment_posted(url, "Eaton Park Quận 2</a> Eaton Park Quận 2 là dự án mới nhất của Gamuda Land, được phát triển với vị trí độc đáo ngay trên đường Mai Chí Thọ, Phường An Phú, Quận 2, nay thuộc TP Thủ Đức – TP Hồ Chí Minh"):
+                    # print(f"Success {url}")
+                    self.update_status(url, "Success")
+                    self.success_count += 1
+                    self.update_success_count()
+                    print(f"[SUCCESS]:\t\t{url}")
+                else:
+                    self.update_status(url, "Failed (Check Success Failed)")
+                    print("[FAILED]:\t\tCheck Success Failed")
 
         finally:
             self.app.driver.quit()

@@ -1,18 +1,19 @@
 500-600:
 Success: 32/101
-https://www.tisk-plakatu.cz/tisk-plakatu-objednavka/						capcha
-https://harry.sufehmi.com/archives/2022-01-24-cloud-and-drc/					capcha
-https://dianamazal.com/2019/03/17/futuro-deseado/						deo hieu sao success, ko co comment luon
-https://development.bookyourcar.co.in/news/upcoming-car-models-of-2021-a-peek-into/		Error: The comment could not be saved.
-https://www.blogradardenoticias.com.br/pagina-exemplo/						captcha tự chế
-http://themasterscall.net/apostle-edith-wells/							captcha
+https://www.tisk-plakatu.cz/tisk-plakatu-objednavka/						                capcha
+https://harry.sufehmi.com/archives/2022-01-24-cloud-and-drc/					            capcha
+https://dianamazal.com/2019/03/17/futuro-deseado/						                    deo hieu sao success, ko co comment luon
+https://development.bookyourcar.co.in/news/upcoming-car-models-of-2021-a-peek-into/		    Error: The comment could not be saved.
+https://www.blogradardenoticias.com.br/pagina-exemplo/						                captcha tự chế
+http://themasterscall.net/apostle-edith-wells/							                    captcha
 
 True success: 23/101
 
 special:
-http://biyografiforum.10tl.net/showthread.php?pid=2382&tid=486					deo skip duoc
-https://freebiesloaded.co/audio-video-chinko-ekun-mafo/						i want FREEBIES
-
+http://biyografiforum.10tl.net/showthread.php?pid=2382&tid=486					            deo skip duoc
+https://freebiesloaded.co/audio-video-chinko-ekun-mafo/						                i want FREEBIES
+https://mediaid.dk/portfolio-item/demo-skyline/                                             fail lao, co the do kep
+https://movieexplaination.online/2023/11/23/benefits-of-downloading-video-downloader-app/   fail lao
 
 
 https://harry.sufehmi.com/archives/2022-01-24-cloud-and-drc/

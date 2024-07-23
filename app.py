@@ -8,11 +8,7 @@ class App:
     def __init__(self):
         
         self.urls = [
-            "https://harry.sufehmi.com/archives/2022-01-24-cloud-and-drc/",
-            "https://dianamazal.com/2019/03/17/futuro-deseado/",
-            "https://development.bookyourcar.co.in/news/upcoming-car-models-of-2021-a-peek-into/",
-            "https://www.blogradardenoticias.com.br/pagina-exemplo/",
-            "http://themasterscall.net/apostle-edith-wells/",
+            "https://www.nasmeca.com/ghalymarco/",  
         ]
         
         self.selectors = {
@@ -30,10 +26,11 @@ class App:
             "phone": [
                 "input[type='text'][name*='phone' i]",  
                 "input[name*='phone' i]",
-                "input[type='text']"],
+                "input[type='number']"],
             "website": [
                 "input[type='text'][name*='url' i]",  
                 "input[name*='url' i]",
+                "input[name*='site' i]",
                 "input[type='text']"],
             "comment": [
                 "textarea[name*='comment' i]", 
@@ -147,8 +144,22 @@ class App:
                 element = self.driver.find_element(By.CSS_SELECTOR, selector)
                 if element and element.is_displayed() and element.is_enabled():
                     return element
+            except NoSuchElementException:
+                print(f"[LOG]:\t\t\tFailed to find element with selector {selector}: No such element")
             except Exception as e:
-                print(f"Failed to find element with selector {selector}: {e}")
+                print(f"[LOG]:\t\t\tFailed to find element with selector {selector}: {str(e).splitlines()[0]}")
+
+    def find_form_elements(self, selectors):
+        elements = []  # List to hold found elements
+        for selector in selectors:
+            try:
+                element = self.driver.find_element(By.CSS_SELECTOR, selector)
+                if element and element.is_displayed() and element.is_enabled():
+                    elements.append(element)  # Add the element to the list
+            except Exception as e:
+                print(f"[LOG]:\t\t\tFailed to find element with selector {selector}: {e}")
+
+        return elements  # Return the list of found elements
 
     def is_captcha_present(self):
         try:
@@ -158,6 +169,23 @@ class App:
         except NoSuchElementException:
             return False
 
+    def check_comment_posted(self, url, comment_text):
+        try:
+            self.driver.get(url)
+            self.driver.execute_script("location.reload(true);")
+            WebDriverWait(self.driver, 2)
+            
+            page_source = self.driver.page_source
+            # print("page source ", page_source)
+            # Check if the comment text is present in the comment section
+            if comment_text in page_source:
+                print("[LOG]:\t\t\tComment successfully posted.")
+                return True
+            else:
+                print("[LOG]:\t\t\tComment not found.")
+                return False
+        except UnexpectedAlertPresentException:
+            print("[LOG]:\t\t\tAlert exception")
 
 if __name__ == "__main__":
     App().run()
