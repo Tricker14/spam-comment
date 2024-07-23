@@ -26,10 +26,11 @@ class App:
             "phone": [
                 "input[type='text'][name*='phone' i]",  
                 "input[name*='phone' i]",
-                "input[type='text']"],
+                "input[type='number']"],
             "website": [
                 "input[type='text'][name*='url' i]",  
                 "input[name*='url' i]",
+                "input[name*='site' i]",
                 "input[type='text']"],
             "comment": [
                 "textarea[name*='comment' i]", 
@@ -143,8 +144,10 @@ class App:
                 element = self.driver.find_element(By.CSS_SELECTOR, selector)
                 if element and element.is_displayed() and element.is_enabled():
                     return element
+            except NoSuchElementException:
+                print(f"[LOG]:\t\t\tFailed to find element with selector {selector}: No such element")
             except Exception as e:
-                print(f"Failed to find element with selector {selector}: {e}")
+                print(f"[LOG]:\t\t\tFailed to find element with selector {selector}: {str(e).splitlines()[0]}")
 
     def find_form_elements(self, selectors):
         elements = []  # List to hold found elements
@@ -154,7 +157,7 @@ class App:
                 if element and element.is_displayed() and element.is_enabled():
                     elements.append(element)  # Add the element to the list
             except Exception as e:
-                print(f"Failed to find element with selector {selector}: {e}")
+                print(f"[LOG]:\t\t\tFailed to find element with selector {selector}: {e}")
 
         return elements  # Return the list of found elements
 
@@ -173,16 +176,16 @@ class App:
             WebDriverWait(self.driver, 2)
             
             page_source = self.driver.page_source
-            print("page source ", page_source)
+            # print("page source ", page_source)
             # Check if the comment text is present in the comment section
             if comment_text in page_source:
-                print("Comment successfully posted.")
+                print("[LOG]:\t\t\tComment successfully posted.")
                 return True
             else:
-                print("Comment not found.")
+                print("[LOG]:\t\t\tComment not found.")
                 return False
         except UnexpectedAlertPresentException:
-            print("alert exception")
+            print("[LOG]:\t\t\tAlert exception")
 
 if __name__ == "__main__":
     App().run()
