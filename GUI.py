@@ -82,12 +82,12 @@ class URLScannerGUI:
                 self.update_progress()
                 print("\n\n")
                 print("[PASSED]:\t\t", self.success_count, "/", self.total_urls)
+                print("[CURRENT]:\t\t", url)
 
                 try:
                     # Process the URL
                     self.app.driver.get(url)
                     WebDriverWait(self.app.driver, 2)
-                    print("[CURRENT]:\t\t", url)
 
                     if self.app.is_captcha_present():
                         self.update_status(url, "Failed (CAPTCHA)")
@@ -161,12 +161,12 @@ class URLScannerGUI:
                     self.app.restart_driver()
                     continue
 
-                if self.app.check_comment_posted(url, "Eaton Park Quận 2</a> Eaton Park Quận 2 là dự án mới nhất của Gamuda Land, được phát triển với vị trí độc đáo ngay trên đường Mai Chí Thọ, Phường An Phú, Quận 2, nay thuộc TP Thủ Đức – TP Hồ Chí Minh"):
+                if self.app.check_comment_posted(url, "Eaton Park Quận 2 là dự án mới nhất của Gamuda Land, được phát triển với vị trí độc đáo ngay trên đường Mai Chí Thọ, Phường An Phú, Quận 2, nay thuộc TP Thủ Đức – TP Hồ Chí Minh"):
                     # print(f"Success {url}")
                     self.update_status(url, "Success")
                     self.success_count += 1
                     self.update_success_count()
-                    print(f"[SUCCESS]:\t\t{url}")
+                    print(f"[SUCCESS]:\t\tSuccess at: {url}")
                 else:
                     self.update_status(url, "Failed (Check Success Failed)")
                     print("[FAILED]:\t\tCheck Success Failed")

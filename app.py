@@ -8,7 +8,13 @@ class App:
     def __init__(self):
         
         self.urls = [
-            "https://www.nasmeca.com/ghalymarco/",  
+            "http://www.serverol.com/product/nvidia-2080ti",
+            "http://mjcmonblanc.fr/?p=1420",
+            "http://dahaetic.co.kr/bbs/board.php?bo_table=free&wr_id=22370",
+            "http://www.guardianwear.com/on-his-last-day-police-officer-gives-out-gift-cards-instead-of-tickets/",
+            "https://formation-stage-coiffure.fr/produit/graphic-design",
+            "http://elektroprof.com/descargar-mp4-k.html",
+            "https://compere-morel-breteuil.ac-amiens.fr/comment-avoir-pronote-sur-son-smartphone-ou-tablette-tuto-video/"
         ]
         
         self.selectors = {
@@ -179,10 +185,10 @@ class App:
             # print("page source ", page_source)
             # Check if the comment text is present in the comment section
             if comment_text in page_source:
-                print("[LOG]:\t\t\tComment successfully posted.")
+                print("[LOG]:\t\t\tSuccess Check: Comment successfully posted.")
                 return True
             else:
-                print("[LOG]:\t\t\tComment not found.")
+                print("[LOG]:\t\t\tSuccess Check: Comment not found.")
                 return False
         except UnexpectedAlertPresentException:
             print("[LOG]:\t\t\tAlert exception")
